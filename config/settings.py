@@ -128,3 +128,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# user라는 클래스와 내가 생성한 user(applications)가 네이밍이 겹치기 때문에 Django에서 제공해주는 Custom 방식을 사용해서
+# 내가 사용하려는 user application을 기반으로 처리하도록 명시해준다.
+AUTH_USER_MODEL = "users.User"
