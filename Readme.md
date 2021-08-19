@@ -38,3 +38,12 @@ reservations - 예약 관련 class
 
 > 번호 모델을 생성하기 위해서 pip install django-phonenumber-field 설치
 
+### QUREYSET & MANAGE
+> ORM Qureyset 문서
+> 
+> https://docs.djangoproject.com/en/3.2/topics/db/queries/
+>
+> 강의 7참고!!!!!!!!
+
+     
+

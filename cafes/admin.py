@@ -21,7 +21,8 @@ class CafeAdmin(admin.ModelAdmin):
         'country',
         'start',
         'end',
-        'parkSite'
+        'parkSite',
+        'count_cafeMenu',
     )
 
     # 내가 만든 모델 내부의 host가 외래키로 users.User를 가지고 있기 때문에,
@@ -61,6 +62,16 @@ class CafeAdmin(admin.ModelAdmin):
     # 다대다 관계의 모델만 사용가능함
     filter_horizontal = ('cafeMenu',)
     # ------------------------------------------------------------------------------------------------------------------
+    # QUREYSET & MANAGE
+    # ORM Qureyset 문서
+    # https://docs.djangoproject.com/en/3.2/topics/db/queries/
+    # 함수에서 obj를 읽어오는 기준은 Row를 기준으로 읽는다.
+    # option : all(), count()
+    # ------------------------------------------------------------------------------------------------------------------
+    def count_cafeMenu(self, cafeobj):
+        cafeMenuCount = cafeobj.cafeMenu.count()
+        return cafeMenuCount
+
 @admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
     pass

@@ -76,7 +76,13 @@ class Cafe(CoreModle.TimeStampedModel):
     
     # 가게 주인 
     # FIXME: 어차피 카페를 내가 관리할거면 딱히 필요는 없을것 같음
-    host = models.ForeignKey(userModel.User, on_delete=models.CASCADE)
+    # 역참조를 위해서 기존의 _set을 사용하기엔 너무 귀찮으니까 related_name을 사용한다.
+    # 정참조는 상관없음
+    # 정참조란 현재 Cafe를 바라보고 있는 host는 Cafe모델에서 cafe.host.요소 이런식으로 접근이 가능하다.
+    # 반면 user쪽에서는 어떤 카페데이터를 가지고 있는지 알 수 없다.
+    # 그렇기 때문에 만들어진게 related_name을 사용해서 역으로 user모델에서도 cafe를 알 수 있도록한다.
+    # 즉, 특정 유저가 어떤 카페의 정보를 가지고 있는지 알 수 있게 된다.
+    host = models.ForeignKey(userModel.User, on_delete=models.CASCADE, related_name='owner')
 
     cafetype = models.ForeignKey(CafeType, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='커피 메뉴')
 
