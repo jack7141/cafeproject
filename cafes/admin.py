@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Cafe
 
-# Register your models here.
+
+@admin.register(Cafe)
+class RoomAdmin(admin.ModelAdmin):
+    pass

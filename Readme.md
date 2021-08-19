@@ -28,6 +28,8 @@ reservations - 예약 관련 class
 ### 주의사항
 
 * Application 이름들은 무조건 복수형으로 사용해야한다.
+* C:\Users\ghl92\Project\CafeProject 구조의 시작은,
+  내 project가 시작하는 위치를 기준으로 경로를 잡아야함
 ---
 
 ### 개발노트  
