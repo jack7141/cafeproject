@@ -36,3 +36,5 @@ reservations - 예약 관련 class
 > Application 내부의 migrations 폴더를 삭제했을 경우, 
 > 그냥 폴더를 수동으로 만들고 __init__.py만 만들어서 다시 처음부터 진행하면 됨
 
+> 번호 모델을 생성하기 위해서 pip install django-phonenumber-field 설치
+

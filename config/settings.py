@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 앱
     'cafes',
     'conversations',
     'lists',
@@ -44,6 +46,9 @@ INSTALLED_APPS = [
     'reviews',
     'users',
     'core',
+
+    # 서드파티
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
