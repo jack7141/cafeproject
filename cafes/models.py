@@ -3,18 +3,7 @@ from core import models as CoreModle
 from ConsVar import ConstVar
 from users import models as userModel
 from phonenumber_field.modelfields import PhoneNumberField
-class AbstractItem(CoreModle.TimeStampedModel):
-    '''
-    * 다대다의 Item 관리 모델
-    '''
 
-    name = models.CharField(max_length=80)
-
-    class Meta:
-        abstract = True
-
-    def __str__(self):
-        return self.name
 
 class MenuItem(CoreModle.TimeStampedModel):
     '''
@@ -30,7 +19,7 @@ class MenuItem(CoreModle.TimeStampedModel):
     def __str__(self):
         return f'{self.menu}, {self.price}'
 
-class CafeType(AbstractItem):
+class CafeType(CoreModle.AbstractItem):
     class Meta:
         verbose_name_plural = "카페 종류"
 
@@ -82,19 +71,18 @@ class Cafe(CoreModle.TimeStampedModel):
     # 가게 종료시간
     end = models.TimeField(null=True, blank=True, verbose_name='영업 종료시간')
     
-    # 예약 유/무
+    # 주차장 유/무
     parkSite = models.BooleanField(default=False,null=True, blank=True)
     
     # 가게 주인 
     # FIXME: 어차피 카페를 내가 관리할거면 딱히 필요는 없을것 같음
     host = models.ForeignKey(userModel.User, on_delete=models.CASCADE)
 
-    # 카페 종류는 한 카페안에서도 같은 맥락 및 여러 메뉴를 갖을 수 있기 때문에 다대다관계로 사용한다.
-    cafetype = models.ManyToManyField(CafeType, blank=True, verbose_name='커피 메뉴')
+    cafetype = models.ForeignKey(CafeType, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='커피 메뉴')
 
     # 카페 종류는 한 카페안에서도 같은 맥락 및 여러 메뉴를 갖을 수 있기 때문에 다대다관계로 사용한다.
     # 커스텀 용이하게 핸들링
-    cafeMenu = models.ManyToManyField(Menu,null=True, blank=True)
+    cafeMenu = models.ManyToManyField(Menu, blank=True)
 
 
     def __str__(self):
