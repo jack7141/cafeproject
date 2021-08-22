@@ -18,13 +18,23 @@ class Review(CoreModle.TimeStampedModel):
     location = models.IntegerField()
     
     # 청결
-    clean = models.IntegerField()
+    cleanPoint = models.IntegerField(null=True, blank=True)
 
     # 리뷰 쓴 유저
     user = models.ForeignKey('users.User', on_delete=models.CASCADE)
 
     # 카페
-    cafe = models.ForeignKey('cafes.Cafe', on_delete=models.CASCADE)
+    cafe = models.ForeignKey('cafes.Cafe', on_delete=models.CASCADE, related_name='reviews')
 
     def __str__(self):
         return f'{self.cafe.cafeName} - {self.review}'
+
+    def rating_average(self):
+        avg = (
+            self.starPoint
+            + self.Interior
+            + self.location
+            + self.cleanPoint
+        ) / 4
+
+        return round(avg, 2)

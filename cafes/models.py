@@ -10,14 +10,14 @@ class MenuItem(CoreModle.TimeStampedModel):
     * 다대다의 메뉴 관리 모델
     '''
 
-    menu = models.CharField(max_length=80, null=True, blank=True, verbose_name='메뉴')
+    name = models.CharField(max_length=80, null=True, blank=True, verbose_name='메뉴')
     price = models.IntegerField(null=True, blank=True, verbose_name='가격')
 
     class Meta:
         abstract = True
 
     def __str__(self):
-        return f'{self.menu}, {self.price}'
+        return f'{self.name}, {self.price}'
 
 class CafeType(CoreModle.AbstractItem):
     class Meta:
@@ -84,17 +84,41 @@ class Cafe(CoreModle.TimeStampedModel):
     # 즉, 특정 유저가 어떤 카페의 정보를 가지고 있는지 알 수 있게 된다.
     host = models.ForeignKey(userModel.User, on_delete=models.CASCADE, related_name='owner')
 
-    cafetype = models.ForeignKey(CafeType, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='커피 메뉴')
+    cafetype = models.ForeignKey(CafeType, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='카페 타입', related_name='owner')
 
     # 카페 종류는 한 카페안에서도 같은 맥락 및 여러 메뉴를 갖을 수 있기 때문에 다대다관계로 사용한다.
     # 커스텀 용이하게 핸들링
-    cafeMenu = models.ManyToManyField(Menu, blank=True)
+    cafeMenu = models.ManyToManyField(Menu, blank=True, related_name='owner')
 
 
     def __str__(self):
         return self.cafeName
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # QUREYSET & MANAGE
+    # ORM Qureyset 문서
+    # https://docs.djangoproject.com/en/3.2/topics/db/queries/
+    # 함수에서 obj를 읽어오는 기준은 Row를 기준으로 읽는다.
+    # option : all(), count()
+    # ------------------------------------------------------------------------------------------------------------------
+    def count_cafeMenu(self):
+        cafeMenuCount = self.cafeMenu.count()
+        return cafeMenuCount
 
+    def count_cafePhoto(self):
+        cafePhotoCount = self.cafephotos.count()
+        return cafePhotoCount
+
+    def total_rating(self):
+        all_reviews = self.reviews.all()
+        all_ratings = 0
+        for review in all_reviews:
+            all_ratings += review.rating_average()
+
+        if all_ratings == 0:
+            return all_ratings / 1
+        else:
+            return all_ratings / len(all_reviews)
 
 class Photo(CoreModle.TimeStampedModel):
     '''
@@ -105,7 +129,7 @@ class Photo(CoreModle.TimeStampedModel):
     file = models.ImageField()
 
     # 카페가 삭제되면 이미지도 삭제되야하므로, 연결해준다.
-    room = models.ForeignKey(Cafe, on_delete=models.CASCADE)
+    room = models.ForeignKey(Cafe, on_delete=models.CASCADE, related_name='cafephotos')
 
     def __str__(self):
         return self.caption
