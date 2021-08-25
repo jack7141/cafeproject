@@ -56,7 +56,7 @@ class CafeAdmin(admin.ModelAdmin):
         ),
         (
             '카페 운영 정보',
-            {'fields':('start','end','cafetype')},
+            {'fields':('start','end','cafetype','host')},
         ),
         (
             '메뉴 정보',
