@@ -12,7 +12,7 @@ class User(AbstractUser):
     * 유저 사진
     * 생일
     '''
-    avatar = models.ImageField(blank=True, verbose_name='사진')
+    avatar = models.ImageField(blank=True, upload_to='avatars', verbose_name='사진')
 
     # 선택사항은 튜플로 구현하여 DB에 저장되는 값과 데이터를 읽어올때 값을 따로 처리
     gender = models.CharField(

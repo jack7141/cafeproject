@@ -297,5 +297,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
+upload/
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,node,react

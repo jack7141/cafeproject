@@ -37,6 +37,17 @@ reservations - 예약 관련 class
 > 그냥 폴더를 수동으로 만들고 __init__.py만 만들어서 다시 처음부터 진행하면 됨
 
 > 번호 모델을 생성하기 위해서 pip install django-phonenumber-field 설치
+> 
+>
+
+> django-seed를 통해서 더비 데이터 생성
+> 1. 내가 만들고자 하는 App폴더 내부에서 management폴더 생성
+> 2. management폴더 내부에서 __init__.py 파일 및 commands폴더 생성
+> 3. commands폴더 내부에서 __init__.py 파일 생성
+> 
+> 데이터가 많이 필요하지 않은 부분은 내가 직접 수동으로 사용할 수 있지만, 이메일 혹은 사용자 계정같은 부분은
+> 수동으로 하기엔 너무 방대한 양이기 때문에  Django에서 제공하는 django_seed를 사용해서 더미 데이터를 넣어준다.
+> 
 
 ### QUREYSET & MANAGE
 > ORM Qureyset 문서

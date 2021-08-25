@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     # 서드파티
     'phonenumber_field',
+    'django_seed',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 내가 사용하려는 user application을 기반으로 처리하도록 명시해준다.
 
 AUTH_USER_MODEL = "users.User"
+
+# 사진 이미지 경로를 위해서 기존의 폴더 절대 경로 + 내 폴더
+import os
+MEDIA_ROOT = os.path.join(BASE_DIR, "upload")
+
+MEDIA_URL = '/media/'

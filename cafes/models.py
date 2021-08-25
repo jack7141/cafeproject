@@ -4,6 +4,8 @@ from ConsVar import ConstVar
 from users import models as userModel
 from phonenumber_field.modelfields import PhoneNumberField
 
+# 장고에서 HTML상의 코드를 방어하고 있는것을 안전하다고 인식시켜서 HTML코드를 사용하게 해준다.
+from django.utils.html import mark_safe
 
 class MenuItem(CoreModle.TimeStampedModel):
     '''
@@ -27,8 +29,6 @@ class Menu(MenuItem):
     class Meta:
         verbose_name_plural = "메뉴"
 
-class Photo(CoreModle.TimeStampedModel):
-    pass
 
 class Cafe(CoreModle.TimeStampedModel):
     '''
@@ -94,6 +94,16 @@ class Cafe(CoreModle.TimeStampedModel):
     def __str__(self):
         return self.cafeName
 
+    # override
+    def save(self, *args, **kwargs):
+        '''
+        * save를 오버라이드를 통해서 intercepting한다. 
+        사용자가 저장하는것을 취향에 맞게 내가 알아서 변경해서 저장
+        '''
+        # super()를 이용하여 부모클래스에 접근할 수 있도록한다.
+        print('save')
+        # super().save(*args, **kwargs)
+
     # ------------------------------------------------------------------------------------------------------------------
     # QUREYSET & MANAGE
     # ORM Qureyset 문서
@@ -126,10 +136,24 @@ class Photo(CoreModle.TimeStampedModel):
     '''
 
     caption = models.CharField(max_length=80)
-    file = models.ImageField()
+    file = models.ImageField(upload_to='cafeImages')
 
     # 카페가 삭제되면 이미지도 삭제되야하므로, 연결해준다.
     room = models.ForeignKey(Cafe, on_delete=models.CASCADE, related_name='cafephotos')
 
     def __str__(self):
         return self.caption
+
+    def get_thumbNali(self):
+        '''
+        * dir()을 통해서 property를 확인해서 필요한 정보를 가져옴
+        print(self.file.url)
+        print(self.file.size)
+        print(self.file.width)
+        print(self.file.height)
+        '''
+        return mark_safe(f'<img width="150px" src="{self.file.url}" />')
+
+
+
+

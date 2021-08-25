@@ -11,6 +11,10 @@ class ItemAdmin(admin.ModelAdmin):
     def used_by(self, objects):
         return objects.owner.count()
 
+class PhotoInline(admin.TabularInline):
+    model = Photo
+
+
 @admin.register(Cafe)
 class CafeAdmin(admin.ModelAdmin):
 
@@ -48,7 +52,7 @@ class CafeAdmin(admin.ModelAdmin):
     fieldsets = (
         (
             "카페 정보",
-            {'fields': ('cafeName','city','country','parkSite')},
+            {'fields': ('cafeName','city','country','parkSite','website')},
         ),
         (
             '카페 운영 정보',
@@ -64,10 +68,11 @@ class CafeAdmin(admin.ModelAdmin):
         ),
 
     )
+    inlines = (PhotoInline,)
     # 다대다 관계의 모델만 사용가능함
     filter_horizontal = ('cafeMenu',)
 
 
 @admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('__str__', 'get_thumbNali')
