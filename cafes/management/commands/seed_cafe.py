@@ -41,7 +41,7 @@ class Command(BaseCommand):
         flattenDatas = flatten(createPhotos.values())
         for id in flattenDatas:
             elementsCafes = Cafe.objects.get(id=id)
-            
+
             for i in range(1, random.randint(4,5)):
                 # Forien Key 추가 방법 Create함수 이용
                 Photo.objects.create(
