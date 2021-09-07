@@ -1,0 +1,17 @@
+<!--큰 골격 담당-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- block은 extend를 한 모듈에서 가져오는 것   -->
+    <!-- block from cafes/cafe_list.html    -->
+    <title>{% block page_name %}{% endblock page_name %}| Nbnb</title>
+  </head>
+  <body>
+    {% include "partials/header.html" %}
+    {% block content %}{% endblock %}
+    {% include "partials/footer.html" %}
+  </body>
+</html>

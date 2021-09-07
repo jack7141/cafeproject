@@ -1,0 +1,31 @@
+<!--베이스 html에서 모든걸 임포트한다.-->
+{% extends "base.html" %}
+<!--block은 자식 템플릿을 넣는 방법 block {name}은 내 마음대로-->
+{% block page_name %}
+    Home
+{% endblock page_name %}
+
+<!--내용-->
+{% block content %}
+    {% for cafe in cafes  %}
+        <!--  url 태그를 사용하면 /변수/변수 이런식으로 자동으로 주어짐      -->
+        <!-- 내가 가고싶은 url 주소를 입력하면 된다. 즉, cafes url에서 namespace로 지정한 경로로 이동하게 됨-->
+        <a href="{% url 'cafes:viewDetail' cafe.pk  %}">
+            <h1>{{cafe.cafeName}}</h1>
+        </a>
+        {{cafe.city}} - {{cafe.cafetype}}
+    {% endfor %}
+
+
+    <h5>
+    {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+    {% endif %}
+
+    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+
+    {% if page_obj.has_next  %}
+        <a href="?page={{page_obj.next_page_number}}">Next</a>
+    {% endif %}
+    </h5>
+{% endblock content %}
