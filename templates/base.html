@@ -11,7 +11,20 @@
   </head>
   <body>
     {% include "partials/header.html" %}
+    {% block search-bar %}
+
+    <header>
+      <!-- 액션이 들어오면 cafes의 search함수로 이동시키고 get방식으로 데이터를 사용한다.   -->
+      <form method="get" action="{% url 'cafes:viewSearch' %}">
+        <input name="InputCity" placeholder="도시명으로 검색" />
+      </form>
+    </header>
+
+    {% endblock search-bar %}
+
     {% block content %}{% endblock %}
+
     {% include "partials/footer.html" %}
+
   </body>
 </html>

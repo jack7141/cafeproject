@@ -4,6 +4,8 @@ from ConsVar import ConstVar
 from users import models as userModel
 from phonenumber_field.modelfields import PhoneNumberField
 
+from django.urls import reverse
+
 # 장고에서 HTML상의 코드를 방어하고 있는것을 안전하다고 인식시켜서 HTML코드를 사용하게 해준다.
 from django.utils.html import mark_safe
 
@@ -33,7 +35,6 @@ class Menu(MenuItem):
 class Cafe(CoreModle.TimeStampedModel):
     '''
     * core에서 데이터가 생성되는 날짜와 업데이트되는 날짜를 상속받아서 사용한다.
-
     '''
     # 카페이름
     cafeName = models.CharField(max_length=30)
@@ -94,7 +95,9 @@ class Cafe(CoreModle.TimeStampedModel):
     def __str__(self):
         return self.cafeName
 
+    # ------------------------------------------------------------------------------------------------------------------
     # override
+    # ------------------------------------------------------------------------------------------------------------------
     def save(self, *args, **kwargs):
         '''
         * save를 오버라이드를 통해서 intercepting한다. 
@@ -104,6 +107,11 @@ class Cafe(CoreModle.TimeStampedModel):
         # 현재 따로 수행하는 일이 없어서 주석해도 상관없음 
         # 단 override되고 있기 때문에, 함수 전체를 주석처리 해야함
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        # admin 패널에서 해당 페이지로 넘길 수 있겠금, reverse함수를 사용한다.
+        # 우리가 만든 viewDetail(cafes/View 함수)은 파라미터를 받아야하기 때문에 우리가 지정한 id와 맞춰서 id를 넘겨준다.
+        return reverse('cafes:viewDetail', kwargs={'id':self.id})
 
     # ------------------------------------------------------------------------------------------------------------------
     # QUREYSET & MANAGE

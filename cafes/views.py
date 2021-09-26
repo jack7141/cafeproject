@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from cafes.models import Cafe
-from django.views.generic import ListView
+from cafes.models import Cafe, CafeType
+from django.views.generic import ListView, DetailView
 
 
 class HomeView(ListView):
@@ -17,6 +17,29 @@ class HomeView(ListView):
     context_object_name = 'cafes'
 
 
+class CafeDetail(DetailView):
+    model = Cafe
+    # 기본적으로 DetailView가 pk로 지정이 되어있기 때문에 내가 커스텀하려면
+    # 아래의 옵션 사용해야함.
+    pk_url_kwarg = 'id'
 
-def CafeDetail(request, id):
-    return render(request, "cafes/detail.html")
+
+def search(request):
+    # HTML Tag에서 name으로 검색, 없으면 Default로 '검색결과없음'을 띄움
+    # HTML에서 가져온 데이터를 담아두려고 처리함
+
+    # FrontUI
+    UIcafetype = int(request.GET.get('cafetype',0))
+    GetFromSearchBar = request.GET.get('InputCity', '검색결과없음')
+    form = {'city':GetFromSearchBar, 'UIcafetype':UIcafetype}
+
+    # DB에서 온 데이터
+    cafetype = CafeType.objects.all()
+    choices = {'cafetypes':cafetype}
+
+    return render(
+        request,
+        'cafes/search.html',
+        # UI에서 지정한 값을 지워지지않고 Default로 올려두기로 위함
+        {**form, **choices}
+    )

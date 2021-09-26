@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block page_name %}
+     검색
+{% endblock page_name %}
+
+{% block search-bar %}
+{% endblock search-bar %}
+
+{% block content %}
+    <h2>검색!</h2>
+      <!-- 액션이 들어오면 cafes의 search함수로 이동시키고 get방식으로 데이터를 사용한다.   -->
+      <form method="get" action="{% url 'cafes:viewSearch' %}">
+
+          <!--     도시검색창     -->
+          <div>
+            <label for="city">도시명</label>
+            <input value="{{city}}" id="city" name="InputCity" placeholder="도시명으로 검색" />
+        </div>
+
+        <!--     카페종류 DropDown     -->
+        <div>
+            <label for="cafetype">카페종류</label>
+            <select id="cafetype" name="cafetype" >
+                <option value="0" {% if UIcafetype == 0 %}selected{% endif %}>카페종류</option>
+                {% for cafetype in cafetypes  %}
+                    <option value="{{cafetype.id}}" {% if UIcafetype == cafetype.id %}selected{% endif %}>{{cafetype}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+          <button>검색</button>
+
+      </form>
+
+    <h2>검색 결과 {{city}}</h2>
+{% endblock content %}
