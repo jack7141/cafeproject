@@ -40,4 +40,9 @@
       </form>
 
     <h2>검색 결과 {{city}}</h2>
+
+    <!-- 카페 결과-->
+    {% for cafes in cafes  %}
+        <h3>{{cafes.cafeName}}</h3>
+    {% endfor %}
 {% endblock content %}
