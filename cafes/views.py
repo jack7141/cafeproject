@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from cafes.models import Cafe, CafeType
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 
 
 class HomeView(ListView):
@@ -24,13 +24,21 @@ class CafeDetail(DetailView):
     pk_url_kwarg = 'id'
 
 
+class SearchView(View):
+    def get(self,request):
+        return render(request, 'cafes/search.html')
+'''
+    # ------------------------------------------------------------------------------------------------------------------
+    # 함수형으로 View를 만들었을 경우 예시
+    # Form API클래스를 사용하여 더 간단하게 표현하기 위해서 Form.py클래스를 생성하고 import해서 사용!
+    # ------------------------------------------------------------------------------------------------------------------
 def search(request):
     # HTML Tag에서 name으로 검색, 없으면 Default로 '검색결과없음'을 띄움
     # HTML에서 가져온 데이터를 담아두려고 처리함
 
     # FrontUI
     UIcafetype = int(request.GET.get('cafetype',0))
-    UIparking = request.GET.get("inputPark", False)
+    UIparking = bool(request.GET.get("inputPark", False))
     GetFromSearchBar = request.GET.get('InputCity', '검색결과없음')
     form = {'city':GetFromSearchBar, 'UIcafetype':UIcafetype, 'UIparking':UIparking}
 
@@ -43,10 +51,10 @@ def search(request):
     # View: FrontEnd에서 가져온 데이터를 통해서 DB를 검색해서 필요한 데이터만 화면에 다시 Render
     # 검색조건을 통해서 내가 원하는 방을 띄워준다.
     # ------------------------------------------------------------------------------------------------------------------
-    
+
     filterArgs = {}
 
-    if UIparking != False:
+    if UIparking == True:
         filterArgs['parkSite'] = True
 
     if UIcafetype != 0:
@@ -63,3 +71,4 @@ def search(request):
         # '**변수'일 경우 딕셔너리형태의 데이터로 보낸다.
         {**form, **choices, 'cafes':cafes}
     )
+'''
