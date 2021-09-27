@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from cafes.models import Cafe, CafeType
 from django.views.generic import ListView, DetailView, View
+from cafes.forms import SearchForm
 
 
 class HomeView(ListView):
@@ -26,7 +27,40 @@ class CafeDetail(DetailView):
 
 class SearchView(View):
     def get(self,request):
-        return render(request, 'cafes/search.html')
+
+        # UI단에서 보내온 요청을 SearchForm 클래스로 넘겨준다.
+        form = SearchForm(request.GET)
+
+
+        if form.is_valid():
+            # 클래스 모든 조건식이 들어왔을 경우
+
+            city = form.cleaned_data.get("city")
+            cafetypes = form.cleaned_data.get("cafetypes")
+            parking = form.cleaned_data.get("parking")
+
+            # 조건문
+            filterArgs = {}
+
+            if parking == True:
+                filterArgs['parkSite'] = True
+
+            if cafetypes is not None:
+                # cafetype은 Cafe 클래스의 foreignKey!
+                filterArgs['cafetype'] = cafetypes
+
+            if city is not None:
+                filterArgs['country'] = city
+
+            cafes = Cafe.objects.filter(**filterArgs)
+            
+            return render(request, 'cafes/search.html', {"form": form, 'cafes': cafes})
+
+        else:
+
+            form = SearchForm()
+
+        return render(request, 'cafes/search.html', {"form": form})
 '''
     # ------------------------------------------------------------------------------------------------------------------
     # 함수형으로 View를 만들었을 경우 예시

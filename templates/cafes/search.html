@@ -8,41 +8,59 @@
 {% endblock search-bar %}
 
 {% block content %}
+<!-- def 형식으로 처리했을 경우 아래와 같은 형식으로 HTML구성, Form class를 사용하면 아래의 방식을 사용하지 않아도 됨-->
+<!--    <h2>검색!</h2>-->
+<!--      &lt;!&ndash; 액션이 들어오면 cafes의 search함수로 이동시키고 get방식으로 데이터를 사용한다.   &ndash;&gt;-->
+<!--      <form method="get" action="{% url 'cafes:viewSearch' %}">-->
+
+<!--          &lt;!&ndash;     도시검색창     &ndash;&gt;-->
+<!--          <div>-->
+<!--            <label for="city">도시명</label>-->
+<!--            <input value="{{city}}" id="city" name="InputCity" placeholder="도시명으로 검색" />-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash;     카페종류 DropDown     &ndash;&gt;-->
+<!--        <div>-->
+<!--            <label for="cafetype">카페종류</label>-->
+<!--            <select id="cafetype" name="cafetype" >-->
+<!--                <option value="0" {% if UIcafetype == 0 %}selected{% endif %}>카페종류</option>-->
+<!--                {% for cafetype in cafetypes  %}-->
+<!--                    <option value="{{cafetype.id}}" {% if UIcafetype == cafetype.id %}selected{% endif %}>{{cafetype}}</option>-->
+<!--                {% endfor %}-->
+<!--            </select>-->
+<!--        </div>-->
+
+<!--          &lt;!&ndash;    주차시설     &ndash;&gt;-->
+<!--          <div>-->
+<!--            <label for="inputPark">주차시설</label>-->
+<!--            <input type="checkbox" name="inputPark" id="inputPark" {% if UIparking  %}checked{% endif %} />-->
+<!--        </div>-->
+
+<!--          <button>검색</button>-->
+
+<!--      </form>-->
+
+<!--    <h2>검색 결과 {{city}}</h2>-->
+
+<!--    &lt;!&ndash; 카페 결과&ndash;&gt;-->
+<!--    {% for cafes in cafes  %}-->
+<!--        <h3>{{cafes.cafeName}}</h3>-->
+<!--    {% endfor %}-->
+
+<!-- Form 형식으로 처리하였을 경우 -->
+
     <h2>검색!</h2>
-      <!-- 액션이 들어오면 cafes의 search함수로 이동시키고 get방식으로 데이터를 사용한다.   -->
-      <form method="get" action="{% url 'cafes:viewSearch' %}">
 
-          <!--     도시검색창     -->
-          <div>
-            <label for="city">도시명</label>
-            <input value="{{city}}" id="city" name="InputCity" placeholder="도시명으로 검색" />
-        </div>
+    <form method="get" action="{% url "cafes:viewSearch" %}">
+        {{form.as_p}}
+        <button>Search</button>
+    </form>
 
-        <!--     카페종류 DropDown     -->
-        <div>
-            <label for="cafetype">카페종류</label>
-            <select id="cafetype" name="cafetype" >
-                <option value="0" {% if UIcafetype == 0 %}selected{% endif %}>카페종류</option>
-                {% for cafetype in cafetypes  %}
-                    <option value="{{cafetype.id}}" {% if UIcafetype == cafetype.id %}selected{% endif %}>{{cafetype}}</option>
-                {% endfor %}
-            </select>
-        </div>
+    <h3>검색결과</h3>
 
-          <!--    주차시설     -->
-          <div>
-            <label for="inputPark">주차시설</label>
-            <input type="checkbox" name="inputPark" id="inputPark" {% if UIparking  %}checked{% endif %} />
-        </div>
-
-          <button>검색</button>
-
-      </form>
-
-    <h2>검색 결과 {{city}}</h2>
-
-    <!-- 카페 결과-->
-    {% for cafes in cafes  %}
-        <h3>{{cafes.cafeName}}</h3>
+    {% for cafe in cafes %}
+        <h3>{{cafe.cafeName}}</h3>
     {% endfor %}
+
+
 {% endblock content %}
