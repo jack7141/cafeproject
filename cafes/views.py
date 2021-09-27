@@ -30,12 +30,15 @@ def search(request):
 
     # FrontUI
     UIcafetype = int(request.GET.get('cafetype',0))
+    UIparking = request.GET.get("inputPark", False)
     GetFromSearchBar = request.GET.get('InputCity', '검색결과없음')
-    form = {'city':GetFromSearchBar, 'UIcafetype':UIcafetype}
+    form = {'city':GetFromSearchBar, 'UIcafetype':UIcafetype, 'UIparking':UIparking}
+
 
     # DB에서 온 데이터
     cafetype = CafeType.objects.all()
-    choices = {'cafetypes':cafetype}
+
+    choices = {'cafetypes':cafetype }
 
     return render(
         request,
