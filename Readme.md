@@ -75,3 +75,27 @@ reservations - 예약 관련 class
 > 
 > ==> npm init ==> pakage,json에서 main, script, license삭제
 > 
+> npm i gulp gulp-postcss gulp-sass gulp-csso node-sass -D
+> 
+> npm install tailwindcss -D
+> 
+> npm i autoprefixer -D
+> 
+> gitignnore에 "node_modules/" 추가
+> 
+> npx tailwind init ==> tailwind.config.js생성됨
+> 
+> gulpfile.js프로젝트 내 생성[내부 내용은 그냥 파일을 가져다 쓰는게 편함]
+> 
+> 폴더구조 생성 assests/scss/styles.scss로 생성했음 
+> 
+> 기본적인 요소 추가!
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+> 
+> package.json에서 scripts 만들고 "css" : "gulp" 항목 추가해준다.
+> 
+> 마지막으로 npm run css
+
+

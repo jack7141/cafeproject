@@ -67,7 +67,8 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # template폴더 사용하려면 아래를 추가해줘야함!!!!!!!
+
+        # TODO:template폴더 사용하려면 아래를 추가해줘야함!!!!!!!
         'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -132,6 +133,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# TODO:static폴더에 있는 요소를 사용하기 위해선 아래항목을 추가해줘야함!!!
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

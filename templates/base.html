@@ -1,23 +1,32 @@
 <!--큰 골격 담당-->
+<!--static폴더에서 데이터를 가져오겠다는 뜻-->
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!--  static에서 css추가  -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <!-- block은 extend를 한 모듈에서 가져오는 것   -->
     <!-- block from cafes/cafe_list.html    -->
     <title>{% block page_name %}{% endblock page_name %}| Nbnb</title>
   </head>
   <body>
-    {% include "partials/header.html" %}
-    {% block search-bar %}
 
-    <header>
-      <!-- 액션이 들어오면 cafes의 search함수로 이동시키고 get방식으로 데이터를 사용한다.   -->
-      <form method="get" action="{% url 'cafes:viewSearch' %}">
-        <input name="InputCity" placeholder="도시명으로 검색" />
-      </form>
+    <header class="container max-w-full flex items-center">
+      <div class="flex items-center">
+          <a href="{% url 'core:CoreHomeView' %}">
+            <img class="w-8 " src="{% static 'img/logo.jpg' %}" />
+          </a>
+        {% block search-bar %}
+          <!-- 액션이 들어오면 cafes의 search함수로 이동시키고 get방식으로 데이터를 사용한다.   -->
+          <form method="get" action="{% url 'cafes:viewSearch' %}">
+            <input name="InputCity" placeholder="도시명으로 검색" />
+          </form>
+        {% include "partials/header.html" %}
+      </div>
     </header>
 
     {% endblock search-bar %}
