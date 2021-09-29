@@ -66,3 +66,12 @@ reservations - 예약 관련 class
     그렇기 때문에 만들어진게 related_name을 사용해서 역으로 user모델에서도 cafe를 알 수 있도록한다.
     즉, 특정 유저가 어떤 카페의 정보를 가지고 있는지 알 수 있게 된다.
      
+
+#### TailwindCSS이란
+> CSS property를 클래스로 포함하는 라이브러리
+> 
+> Tailwind를 사용하려면 PostCss를 사용해야함 ==> 이걸 Gulp을 통해서 브라우저가 이해할 수 있는 형태로 전환(Css형태로 전환)
+> 1. Node.js, gulp을 설치해야함
+> 
+> ==> npm init ==> pakage,json에서 main, script, license삭제
+> 

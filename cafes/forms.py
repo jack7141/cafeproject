@@ -5,7 +5,7 @@ from ConsVar import ConstVar
 class SearchForm(forms.Form):
 
     # 지역
-    city = forms.ChoiceField(required=False, choices=ConstVar.COUNTRY_CHOICES, label='카페종류')
+    city = forms.ChoiceField(required=False, choices=ConstVar.COUNTRY_CHOICES, label='지역')
 
     # 카페종류
     cafetypes = forms.ModelChoiceField(required=False, queryset=CafeType.objects.all(), label='카페종류')

@@ -1,0 +1,13 @@
+{
+  "name": "cafeproject",
+  "version": "1.0.0",
+  "description": "Anaconda를 활용하여 Django를 구축, 패키지 정리",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jack7141/cafeproject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jack7141/cafeproject/issues"
+  },
+  "homepage": "https://github.com/jack7141/cafeproject#readme"
+}

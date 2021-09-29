@@ -53,7 +53,7 @@ class SearchView(View):
                 filterArgs['country'] = city
 
             cafes = Cafe.objects.filter(**filterArgs)
-            
+
             return render(request, 'cafes/search.html', {"form": form, 'cafes': cafes})
 
         else:
