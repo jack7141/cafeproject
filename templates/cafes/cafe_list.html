@@ -1,5 +1,6 @@
 <!--베이스 html에서 모든걸 임포트한다.-->
 {% extends "base.html" %}
+{% load static %}
 <!--block은 자식 템플릿을 넣는 방법 block {name}은 내 마음대로-->
 {% block page_name %}
     Home
@@ -8,10 +9,40 @@
 <!--내용-->
 {% block content %}
 <div class="container mx-auto">
+<!--  강북, 강남, 경기, 부산, 제주   -->
+    <div class="flex mb-9 -mx-40 justify-center text-center">
+        <div>
+            <a>
+                <img class="w-20" src="{% static 'img/city.jpg' %}" />
+                <p>강북</p>
+            </a>
+        </div>
+        <div>
+            <a>
+                <img class="w-20" src="{% static 'img/city.jpg' %}" />
+                <p>강남</p>
+            </a>
+        </div>
+        <div>
+            <a>
+                <img class="w-20" src="{% static 'img/city.jpg' %}" />
+                <p>경기</p>
+            </a>
+        </div>
+        <div>
+            <a>
+                <img class="w-20" src="{% static 'img/city.jpg' %}" />
+                <p>부산</p>
+            </a>
+        </div>
+        <div>
+            <a>
+                <img class="w-20" src="{% static 'img/city.jpg' %}" />
+                <p>제주</p>
+            </a>
+        </div>
+    </div>
 
-            <ul class="rounded-xl bg-gray-800  -mx-40  h-50vh mt-32 mb-24 bg-cover bg-center" style="background-image:url(https://images.unsplash.com/photo-1536315238512-4c8cebdaaf93?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop)">
-                asdfasdfasdf
-            </ul>
     <div class="flex flex-wrap -mx-40">
     {% for cafe in cafes  %}
         <!--  url 태그를 사용하면 /변수/변수 이런식으로 자동으로 주어짐      -->
