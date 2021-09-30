@@ -9,7 +9,7 @@ from users.models import User
 from django_seed import Seed
 
 from django.contrib.admin.utils import flatten
-from ConsVar.ConstVar import CITY_CHOICES
+from ConsVar.ConstVar import CITY_CHOICES, COUNTRY_CHOICES_GANGNAM, COUNTRY_CHOICES_GANGBOK
 import random
 
 class Command(BaseCommand):
@@ -32,9 +32,17 @@ class Command(BaseCommand):
         cafeTypes = CafeType.objects.all()
         cafeMenus = Menu.objects.all()
 
+        RandomCity = random.choice(CITY_CHOICES)
+        if RandomCity[0] == '서울-강북':
+            RandomCountry = random.choice(COUNTRY_CHOICES_GANGBOK)
+        else:
+            RandomCountry = random.choice(COUNTRY_CHOICES_GANGNAM)
+
         seed.add_entity(Cafe, number, {
             'host': lambda x: random.choice(allUser),
             'cafetype': lambda x: random.choice(cafeTypes),
+            'city' : RandomCity[0],
+            'country' : RandomCountry[0],
         })
 
         createPhotos = seed.execute()
@@ -46,7 +54,7 @@ class Command(BaseCommand):
                 # Forien Key 추가 방법 Create함수 이용
                 Photo.objects.create(
                     caption = seed.faker.sentence(),
-                    file = f'upload/{random.randint(1,9)}.jpg',
+                    file = f'cafeImages/{random.randint(1,9)}.jpg',
                     room = elementsCafes
                 )
 

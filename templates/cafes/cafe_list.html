@@ -7,15 +7,23 @@
 
 <!--내용-->
 {% block content %}
+<div class="container mx-auto">
+
+            <ul class="rounded-xl bg-gray-800  -mx-40  h-50vh mt-32 mb-24 bg-cover bg-center" style="background-image:url(https://images.unsplash.com/photo-1536315238512-4c8cebdaaf93?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop)">
+                asdfasdfasdf
+            </ul>
+    <div class="flex flex-wrap -mx-40">
     {% for cafe in cafes  %}
         <!--  url 태그를 사용하면 /변수/변수 이런식으로 자동으로 주어짐      -->
         <!-- 내가 가고싶은 url 주소를 입력하면 된다. 즉, cafes url에서 namespace로 지정한 경로로 이동하게 됨-->
-        <a href="{% url 'cafes:viewDetail' cafe.pk  %}">
-            <h1>{{cafe.cafeName}}</h1>
-        </a>
-        {{cafe.city}} - {{cafe.cafetype}}
+        <!--  cafe(내가 partials/cafe_card.html로 넘기고 싶은 변수명) = cafe(loop를 통해 넘기는 변수명)      -->
+        {% include 'partials/cafe_card.html' with cafe=cafe %}
+<!--        <a href="{% url 'cafes:viewDetail' cafe.pk  %}">-->
+<!--            <h1>{{cafe.cafeName}}</h1>-->
+<!--        </a>-->
+<!--        {{cafe.city}} - {{cafe.cafetype}}-->
     {% endfor %}
-
+    </div>
 
     <h5>
     {% if page_obj.has_previous %}
@@ -28,4 +36,5 @@
         <a href="?page={{page_obj.next_page_number}}">Next</a>
     {% endif %}
     </h5>
+</div>
 {% endblock content %}

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from cafes.models import Cafe, CafeType
 from django.views.generic import ListView, DetailView, View
 from cafes.forms import SearchForm
-
+from ConsVar.ConstVar import CITY_CHOICES, COUNTRY_CHOICES_GANGNAM, COUNTRY_CHOICES_GANGBOK
 
 class HomeView(ListView):
     '''
@@ -14,8 +14,16 @@ class HomeView(ListView):
     paginate_by = 10
     paginate_orphans = 5
     ordering = 'created'
+
     # 기존 Html로 넘어가는 context의 이름을 변경함 object_list -> cafes
     context_object_name = 'cafes'
+    def get_context_data(self, **kwargs):
+        # 요소 추가로 전달하고 싶을때 사용
+        context = super().get_context_data(**kwargs)
+        context["CityChoice"] = CITY_CHOICES
+        context["CityChoiceGangNam"] = COUNTRY_CHOICES_GANGNAM
+        context["CityChoiceGangBok"] = COUNTRY_CHOICES_GANGBOK
+        return context
 
 
 class CafeDetail(DetailView):
@@ -25,12 +33,22 @@ class CafeDetail(DetailView):
     pk_url_kwarg = 'id'
 
 
+
+class CityDetail(DetailView):
+    model = Cafe
+    # 기본적으로 DetailView가 pk로 지정이 되어있기 때문에 내가 커스텀하려면
+    # 아래의 옵션 사용해야함.
+    pk_url_kwarg = 'city'
+    def get(self, request, city):
+        print(city)
+        return render(request, "cafes/search.html")
+
+
+
 class SearchView(View):
     def get(self,request):
-
         # UI단에서 보내온 요청을 SearchForm 클래스로 넘겨준다.
         form = SearchForm(request.GET)
-
 
         if form.is_valid():
             # 클래스 모든 조건식이 들어왔을 경우

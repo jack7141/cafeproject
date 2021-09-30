@@ -12,5 +12,7 @@ class SearchForm(forms.Form):
 
     # 주차시설
     parking = forms.BooleanField(required=False, label='주차시설')
+    
+    # 지역마다 표시되는 항목 따르게 처리해야함     
 
 

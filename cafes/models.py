@@ -129,6 +129,7 @@ class Cafe(CoreModle.TimeStampedModel):
         return cafePhotoCount
 
     def total_rating(self):
+        # related_name='reviews' 리뷰 모델의 related키로 받고있기때문에 접근가능
         all_reviews = self.reviews.all()
         all_ratings = 0
         for review in all_reviews:
@@ -138,6 +139,10 @@ class Cafe(CoreModle.TimeStampedModel):
             return all_ratings / 1
         else:
             return all_ratings / len(all_reviews)
+
+    def first_photo(self):
+        photo, = self.cafephotos.all()[:1]
+        return photo.file.url
 
 class Photo(CoreModle.TimeStampedModel):
     '''
