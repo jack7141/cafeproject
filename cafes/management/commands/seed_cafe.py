@@ -35,7 +35,7 @@ class Command(BaseCommand):
         RandomCity = random.choice(CITY_CHOICES)
         if RandomCity[0] == '서울-강북':
             RandomCountry = random.choice(COUNTRY_CHOICES_GANGBOK)
-        else:
+        elif RandomCity[0] == '서울-강남':
             RandomCountry = random.choice(COUNTRY_CHOICES_GANGNAM)
 
         seed.add_entity(Cafe, number, {

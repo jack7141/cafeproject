@@ -1,3 +1,14 @@
 <div class="w-1/4 mb-10 px-2">
-    <div class="w-full h-64 bg-cover bg-center rounded-lg " style="background-image: url({{cafe.first_photo}});"></div>
+    <div class="w-full h-64 bg-cover bg-center rounded-lg mb-3" style="background-image: url({{cafe.first_photo}});"></div>
+    <div class="flex justify-between">
+        <div class="text-gray-600">
+            {{cafe.country}}
+        </div>
+        <span class="text-sm flex items-center">
+            <i class="fas fa-star text-red-500 text-xs mr-1"></i> {{cafe.total_rating}}
+        </span>
+    </div>
+    <a href="{% url 'cafes:viewDetail' cafe.pk  %}">
+        <span class="text-black w-11/12 block truncate">{{cafe.cafeName}}</span>
+    </a>
 </div>

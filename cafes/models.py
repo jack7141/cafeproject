@@ -138,11 +138,16 @@ class Cafe(CoreModle.TimeStampedModel):
         if all_ratings == 0:
             return all_ratings / 1
         else:
-            return all_ratings / len(all_reviews)
+            return round(all_ratings / len(all_reviews),2)
 
     def first_photo(self):
         photo, = self.cafephotos.all()[:1]
         return photo.file.url
+
+    def get_next_four_photos(self):
+        photo = self.cafephotos.all()[1:5]
+        return photo
+
 
 class Photo(CoreModle.TimeStampedModel):
     '''

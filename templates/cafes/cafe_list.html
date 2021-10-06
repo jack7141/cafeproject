@@ -55,17 +55,22 @@
 <!--        {{cafe.city}} - {{cafe.cafetype}}-->
     {% endfor %}
     </div>
+    <div class="flex items-center justify-center mx-auto container">
+        <h5>
+               {% if page_obj.has_previous %}
+                    <a href="?page={{page_obj.previous_page_number}}" class="text-teal-500">
+                        <i class="fas fa-arrow-left fa-lg"></i>
+                    </a>
+                {% endif %}
 
-    <h5>
-    {% if page_obj.has_previous %}
-        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
-    {% endif %}
+                <span class="mx-3 font-medium text-lg">{{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
 
-    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
-
-    {% if page_obj.has_next  %}
-        <a href="?page={{page_obj.next_page_number}}">Next</a>
-    {% endif %}
-    </h5>
+                {% if page_obj.has_next  %}
+                    <a href="?page={{page_obj.next_page_number}}" class="text-teal-500">
+                        <i class="fas fa-arrow-right fa-lg"></i>
+                    </a>
+                {% endif %}
+        </h5>
+    </div>
 </div>
 {% endblock content %}
