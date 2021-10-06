@@ -25,23 +25,42 @@
                 </div>
 
             </div>
-            <div class="flex border-section">
+            <div class="flex border-b border-gray-400 pb-8 mt-8">
                 <span class="mr-5 font-light">{{cafe.cafetype}}</span>
             </div>
-            <p class="border-section">
+            <p class="border-b border-gray-400 pb-8 mt-8">
                 {{cafe.description}}
             </p>
 
-            <div class="border-section">
+            <div class="border-b border-gray-400 pb-8 mt-8">
                 <h4 class="font-medium text-lg mb-5">메뉴</h4>
                 {% for a in cafe.cafeMenu.all %}
                     <li class="mb-2">{{a}}</li>
                 {% endfor %}
             </div>
-            <div class="border-section">
+            <div class="mt-8">
                 <h4 class="font-medium text-2xl mb-5">후기</h4>
-                <div>
-                    {{cafe.total_rating}} {{cafe.reviews.count}} review{{cafe.reviews.count|pluralize}}
+                <div class="flex items-center">
+                    <div>
+                        <i class="fas fa-star text-teal-500"></i>
+                        <span class="font-bold text-xl">{{cafe.total_rating}}</span>
+                    </div>
+                    <div class="h-5 w-px bg-gray-400 mx-5"></div>
+                    <span class="font-bold text-xl">{{cafe.reviews.count}}</span>
+                    <span>review{{cafe.reviews.count|pluralize}}</span>
+                </div>
+                <div class="mt-10">
+                    {% for a in cafe.reviews.all %}
+                        <div class="border-b border-gray-400 pb-8 mt-8">
+                            <div class="mb-3 flex">
+                                <div class="flex flex-col ml-5">
+                                    <span class="font-medium">{{a.user.first_name}}</span>
+                                    <span class="text-sm text-gray-500 mt-3">{{a.created|date:'y.m.j'}}</span>
+                                </div>
+                            </div>
+                            <p>{{a.review}}</p>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
