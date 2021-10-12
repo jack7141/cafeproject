@@ -118,3 +118,19 @@ reservations - 예약 관련 class
 > 마지막으로 npm run css
 
 
+## Prototype Test
+* Ngrok 사용, Localtunnel(Ngrok은 터미널이 아니라 프로그램이기 때문에 실행하려면 폴더에 들어가서 실행시켜야함)
+* Localtunnel은 node.js에서 제공되므로, Node, Npm이 설치되어있어야한다.
+> Ngrok.com 사이트로 이동 후 파일 다운로드(Mac, window, Linux, FreeBSD? 지원함)
+> 
+> 폴더를 풀고 내부로 들어가서 
+> 
+> https://dashboard.ngrok.com/get-started/setup
+> 
+> ./ngrok authtoken [사이트에서 주어주는 토큰 입력(터미널에서)]
+> 
+> Authtoken saved to configuration file: C:\Users\ghl92/.ngrok2/ngrok.yml ==> 이렇게 되면 성공!
+> 
+> 외부로 공개하기 
+> 
+> ./ngrok http [현재 내 로컬 포트번호]
