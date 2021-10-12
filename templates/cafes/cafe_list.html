@@ -9,38 +9,12 @@
 <!--내용-->
 {% block content %}
 <div class="container mx-auto">
-<!--  강북, 강남, 경기, 부산, 제주   -->
+
     <div class="flex mb-9 -mx-40 justify-center text-center">
-        <div>
-            <a>
-                <img class="w-20" src="{% static 'img/city.jpg' %}" />
-                <p>강북</p>
-            </a>
-        </div>
-        <div>
-            <a>
-                <img class="w-20" src="{% static 'img/city.jpg' %}" />
-                <p>강남</p>
-            </a>
-        </div>
-        <div>
-            <a>
-                <img class="w-20" src="{% static 'img/city.jpg' %}" />
-                <p>경기</p>
-            </a>
-        </div>
-        <div>
-            <a>
-                <img class="w-20" src="{% static 'img/city.jpg' %}" />
-                <p>부산</p>
-            </a>
-        </div>
-        <div>
-            <a>
-                <img class="w-20" src="{% static 'img/city.jpg' %}" />
-                <p>제주</p>
-            </a>
-        </div>
+        {% for city in cityList  %}
+            <!-- 카페 모델이 가지고 있는 city 넘기기   -->
+            {% include 'cafes/cafe_city.html' with city=city  %}
+        {% endfor %}
     </div>
 
     <div class="flex flex-wrap -mx-40">
@@ -73,4 +47,12 @@
         </h5>
     </div>
 </div>
+
+<style>
+.dropdown:focus-within .dropdown-menu {
+  opacity:1;
+  transform: translate(0) scale(1);
+  visibility: visible;
+}
+    </style>
 {% endblock content %}

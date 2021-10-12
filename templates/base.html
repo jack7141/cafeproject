@@ -10,6 +10,7 @@
     <!--  static에서 css추가  -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="css/bootstrap,min.css">
     <!-- block은 extend를 한 모듈에서 가져오는 것   -->
     <!-- block from cafes/cafe_list.html    -->
     <title>{% block page_name %}{% endblock page_name %}| Nbnb</title>
@@ -31,7 +32,7 @@
       <!--   블록 2  -->
       {% include "partials/header.html" %}
     </header>
-
+    {% block city-bar %}{% endblock city-bar %}
     {% block content %}{% endblock %}
     {% include "partials/footer.html" %}
 

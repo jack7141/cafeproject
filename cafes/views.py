@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from cafes.models import Cafe, CafeType
+from cafes.models import Cafe, CafeType, City
 from django.views.generic import ListView, DetailView, View
 from cafes.forms import SearchForm
 from ConsVar.ConstVar import CITY_CHOICES, COUNTRY_CHOICES_GANGNAM, COUNTRY_CHOICES_GANGBOK
@@ -17,13 +17,19 @@ class HomeView(ListView):
 
     # 기존 Html로 넘어가는 context의 이름을 변경함 object_list -> cafes
     context_object_name = 'cafes'
+
     def get_context_data(self, **kwargs):
         # 요소 추가로 전달하고 싶을때 사용
+        # print(City.continent.objects.all())
         context = super().get_context_data(**kwargs)
-        context["CityChoice"] = CITY_CHOICES
-        context["CityChoiceGangNam"] = COUNTRY_CHOICES_GANGNAM
-        context["CityChoiceGangBok"] = COUNTRY_CHOICES_GANGBOK
+        context["cityList"] = City.objects.all()
         return context
+
+
+    # def get(self, request, id):
+    #     print(id)
+    #     # return render(request, "cafes/search.html")
+    #     pass
 
 
 class CafeDetail(DetailView):
@@ -33,15 +39,14 @@ class CafeDetail(DetailView):
     pk_url_kwarg = 'id'
 
 
+#
+class CityDetail(View):
 
-class CityDetail(DetailView):
-    model = Cafe
-    # 기본적으로 DetailView가 pk로 지정이 되어있기 때문에 내가 커스텀하려면
-    # 아래의 옵션 사용해야함.
-    pk_url_kwarg = 'city'
-    def get(self, request, city):
-        print(city)
-        return render(request, "cafes/search.html")
+    def get(self, request, county):
+        # 조건문
+        cafes = Cafe.objects.filter(country=county)
+        cityObj = City.objects.all()
+        return render(request, "cafes/cafe_list.html", {'cafes' : cafes, 'cityList':cityObj})
 
 
 

@@ -3,6 +3,7 @@ from core import models as CoreModle
 from ConsVar import ConstVar
 from users import models as userModel
 from phonenumber_field.modelfields import PhoneNumberField
+from smart_selects.db_fields import ChainedForeignKey
 
 from django.urls import reverse
 
@@ -32,6 +33,22 @@ class Menu(MenuItem):
         verbose_name_plural = "메뉴"
 
 
+class Country(models.Model):
+    name = models.CharField(max_length=30, null=True, blank=True)
+    def __str__(self):
+        return self.name
+
+class City(models.Model):
+    # City = models.CharField(
+    #     choices=ConstVar.CITY_CHOICES, max_length=10, null=True, blank=True, verbose_name='시'
+    # )
+    name = models.CharField(max_length=30, null=True)
+    continent = models.ManyToManyField(Country, blank=True, related_name='cafeCity')
+    def __str__(self):
+        return self.name
+
+
+
 class Cafe(CoreModle.TimeStampedModel):
     '''
     * core에서 데이터가 생성되는 날짜와 업데이트되는 날짜를 상속받아서 사용한다.
@@ -41,6 +58,11 @@ class Cafe(CoreModle.TimeStampedModel):
 
     # 설명
     description = models.TextField()
+
+
+    # city = models.CharField(
+    #     choices=ConstVar.CITY_CHOICES, max_length=10, null=True, blank=True, verbose_name='시'
+    # )
 
     # 시
     city = models.CharField(

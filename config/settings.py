@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'reviews',
     'users',
     'core',
+    'smart_selects',
 
     # 서드파티
     'phonenumber_field',

@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Cafe,CafeType,Menu, Photo
-
+from .models import Cafe,CafeType,Menu, Photo, City, Country
 
 @admin.register(CafeType, Menu)
 class ItemAdmin(admin.ModelAdmin):
@@ -14,6 +13,36 @@ class ItemAdmin(admin.ModelAdmin):
 class PhotoInline(admin.TabularInline):
     model = Photo
 
+@admin.register(Country)
+class CountryAdmin(admin.ModelAdmin):
+    '''
+    * 카페 메뉴 패널
+    '''
+    list_display = (
+        'name',
+    )
+
+
+@admin.register(City)
+class CityAdmin(admin.ModelAdmin):
+    '''
+    * 카페 메뉴 패널
+    '''
+    list_display = (
+        'name',
+    )
+    fieldsets = (
+        (
+            "지역구 입력",
+            {'fields': ('continent',)},
+        ),
+    )
+    # 다대다 관계의 모델만 사용가능함
+    filter_horizontal = ('continent',)
+
+
+class PhotoInline(admin.TabularInline):
+    model = Photo
 
 @admin.register(Cafe)
 class CafeAdmin(admin.ModelAdmin):
@@ -69,6 +98,7 @@ class CafeAdmin(admin.ModelAdmin):
 
     )
     inlines = (PhotoInline,)
+
     # 다대다 관계의 모델만 사용가능함
     filter_horizontal = ('cafeMenu',)
 
