@@ -39,9 +39,7 @@ class CafeDetail(DetailView):
     pk_url_kwarg = 'id'
 
 
-#
 class CityDetail(View):
-
     def get(self, request, county):
         # 조건문
         cafes = Cafe.objects.filter(country=county)
