@@ -1,4 +1,4 @@
-<div class="w-1/4 mb-10 px-2">
+{% comment %} <div class="w-1/4 mb-10 px-2">
     <div class="w-full h-64 bg-cover bg-center rounded-lg mb-3" style="background-image: url({{cafe.first_photo}});"></div>
     <div class="flex justify-between">
         <div class="text-gray-600">
@@ -11,4 +11,43 @@
     <a href="{% url 'cafes:viewDetail' cafe.pk  %}">
         <span class="text-black w-11/12 block truncate">{{cafe.cafeName}}</span>
     </a>
-</div>
+</div> {% endcomment %}
+
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="{% url 'cafes:viewDetail' cafe.pk  %}">
+                    <img alt="Placeholder" class="block h-80 w-full" src="{{cafe.first_photo}}">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="{% url 'cafes:viewDetail' cafe.pk  %}">
+                            {{cafe.cafeName}}
+                        </a>
+                    </h1>
+                    <p class="text-grey-darker text-sm">
+                        
+                    </p>
+                </header>
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
+                        <p class="ml-2 text-sm">
+                            {{cafe.country}}
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fas fa-star text-red-500"> </i>{{cafe.total_rating}}
+                    </a>
+                </footer>
+
+            </article>
+        </div>
+
+
+

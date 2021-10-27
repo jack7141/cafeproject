@@ -33,6 +33,7 @@ class Command(BaseCommand):
         cafeMenus = Menu.objects.all()
 
         RandomCity = random.choice(CITY_CHOICES)
+
         if RandomCity[0] == '서울-강북':
             RandomCountry = random.choice(COUNTRY_CHOICES_GANGBOK)
         elif RandomCity[0] == '서울-강남':
@@ -50,8 +51,9 @@ class Command(BaseCommand):
         for id in flattenDatas:
             elementsCafes = Cafe.objects.get(id=id)
 
-            for i in range(1, random.randint(4,5)):
+            for i in range(1, random.randint(6,7)):
                 # Forien Key 추가 방법 Create함수 이용
+                print(i)
                 Photo.objects.create(
                     caption = seed.faker.sentence(),
                     file = f'cafeImages/{random.randint(1,9)}.jpg',

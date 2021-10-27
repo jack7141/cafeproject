@@ -11,9 +11,9 @@ class HomeView(ListView):
     return render(request, "cafes/cafe_list.html", {'cafes' : allCafeData})
     '''
     model = Cafe
-    paginate_by = 10
+    paginate_by = 12
     paginate_orphans = 5
-    ordering = 'created'
+    ordering = ['created']
 
     # 기존 Html로 넘어가는 context의 이름을 변경함 object_list -> cafes
     context_object_name = 'cafes'

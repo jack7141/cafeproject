@@ -113,7 +113,6 @@ class Cafe(CoreModle.TimeStampedModel):
     # 커스텀 용이하게 핸들링
     cafeMenu = models.ManyToManyField(Menu, blank=True, related_name='owner')
 
-
     def __str__(self):
         return self.cafeName
 

@@ -22,6 +22,7 @@ COUNTRY_CHOICES = (
     ('강남','강남'),
     ('논현','논현'),
     ('신사','신사'),
+    ('연남','연남'),
 )
 
 COUNTRY_CHOICES_GANGNAM = (

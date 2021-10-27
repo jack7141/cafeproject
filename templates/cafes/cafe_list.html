@@ -17,7 +17,8 @@
         {% endfor %}
     </div>
 
-    <div class="flex flex-wrap -mx-40">
+<div class="container my-12 mx-auto px-4 md:px-12">
+    <div class="flex flex-wrap -mx-1 lg:-mx-4">
     {% for cafe in cafes  %}
         <!--  url 태그를 사용하면 /변수/변수 이런식으로 자동으로 주어짐      -->
         <!-- 내가 가고싶은 url 주소를 입력하면 된다. 즉, cafes url에서 namespace로 지정한 경로로 이동하게 됨-->
@@ -28,7 +29,8 @@
 <!--        </a>-->
 <!--        {{cafe.city}} - {{cafe.cafetype}}-->
     {% endfor %}
-    </div>
+        </div>
+    </div> 
     <div class="flex items-center justify-center mx-auto container">
         <h5>
                {% if page_obj.has_previous %}
