@@ -137,7 +137,7 @@ STATIC_URL = '/static/'
 
 # TODO:static폴더에 있는 요소를 사용하기 위해선 아래항목을 추가해줘야함!!!
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
